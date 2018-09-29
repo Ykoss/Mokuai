@@ -134,7 +134,22 @@
                 // 清楚所有内容
                 clear() {
                     if (confirm('你确定清空吗？？')) {
-                        this.todoList = [];
+                        if(this.filter == 'all'){
+                            this.todoList = [];
+                        }else if(this.filter == 'active'){
+                            for(let i=this.todoList.length-1;i>=0;i--){
+                                if(this.todoList[i].isCompleted==false){
+                                    this.todoList.splice(i,1)
+                                }
+                            }
+                        }else{
+                            for(let i=this.todoList.length-1;i>=0;i--){
+                                if(this.todoList[i].isCompleted==true){
+                                    this.todoList.splice(i,1)
+                                }
+                            }
+                        }
+                        
                     }
                 },
                 // 双击内容显示输入框，编辑内容
@@ -161,6 +176,7 @@
                         v.isCompleted = this.isCheckAll;
                     })
                 },
+                // 单选
                 checkIsAll(){
                     // 定义一个空的变量来存储被选中的个数
                     let complatedNum = 0;                   
